@@ -31,14 +31,14 @@ var transport = nodemailer.createTransport("SMTP", {
 /* GET home page. */
 router.get('/', function(req, res) {
   if (req.cookies.email == undefined || req.cookies.pass == undefined){
-    res.render('index', { title: 'Партнёрская программа intimmarket.com' });
+    res.render('index', { title: 'Партнёрская программа chaochai.ru' });
   } else {
     reg.autoLogin(res, req.cookies.email, req.cookies.pass, function(o){
       if (o !== null) {
         req.session.email = o;
         res.redirect('/dashboard');
       } else {
-        res.render('index', { title: 'Партнёрская программа intimmarket.com' });
+        res.render('index', { title: 'Партнёрская программа chaochai.ru' });
       }
     });
   }
@@ -67,7 +67,7 @@ router.get('/admin', function(req, res) {
     }
     Users.find({}, {}, { sort: { 'partnerid' : -1 }, skip: page*per_page, limit: per_page }, function(e, o) {
       res.render('admin', {
-        title    : 'Панель администратора intimmarket.com',
+        title    : 'Панель администратора chaochai.ru',
         users    : o,
         page     : page,
         per_page : per_page,
@@ -111,7 +111,7 @@ router.get('/admin/:partnerid', function(req, res) {
       Orders.count({partnerid: uo.partnerid}, function(err, count) {
         Orders.find({partnerid: uo.partnerid, 'created_at': {'$gte': fr, '$lt': to}, status: st}, {}, { sort: { 'created_at' : -1 }, skip: page*per_page, limit: per_page }, function(e, o) {
           res.render('dashboardadmin', {
-            title    : 'Партнёрская панель intimmarket.com',
+            title    : 'Партнёрская панель chaochai.ru',
             orders   : o,
             count    : count,
             page     : page,
@@ -262,7 +262,7 @@ router.get('/dashboard', function(req, res) {
         Orders.count({partnerid: uo.partnerid}, function(err, count) {
           Orders.find({partnerid: uo.partnerid, 'created_at': {'$gte': fr, '$lt': to}, status: st}, {}, { sort: { 'created_at' : -1 }, skip: page*per_page, limit: per_page }, function(e, o) {
             res.render('dashboard', {
-              title    : 'Партнёрская панель intimmarket.com',
+              title    : 'Партнёрская панель chaochai.ru',
               orders   : o,
               count    : count,
               page     : page,
@@ -446,11 +446,11 @@ reg.addNewAccount = function(res, newData, callback) {
       var pass = generateSalt();
       console.log(pass);
       var message = {
-        from: 'Партнёрская программа intimmarket.com <robot@intimmarket.com>',
+        from: 'Партнёрская программа chaochai.ru <robot@sovechkin.com>',
         to: newData.email,
-        replyTo: 'support@intimmarket.com',
+        replyTo: 'chaochai@mail.ru',
         subject: 'Регистрация',
-        text: 'Ваш логин: ' + newData.email + '\nВаш пароль: ' + pass + '\n\nВойти в панель можно здесь http://www.intimmarket.com/page/partners\n\nВаша партнёрская ссылка находится внутри панели.'
+        text: 'Ваш логин: ' + newData.email + '\nВаш пароль: ' + pass + '\n\nВойти в панель можно здесь http://chaochai.ru/page/partners\n\nВаша партнёрская ссылка находится внутри панели.'
       };
       transport.sendMail(message, function(error) {
         if(error){
@@ -501,11 +501,11 @@ reg.updatePassword = function(res, newData, callback) {
       var pass = generateSalt();
       console.log(pass);
       var message = {
-        from: 'Партнёрская программа intimmarket.com <robot@intimmarket.com>',
+        from: 'Партнёрская программа chaochai.ru <robot@sovechkin.com>',
         to: o.email,
-        replyTo: 'support@intimmarket.com',
+        replyTo: 'chaochai@mail.ru',
         subject: 'Ваш новый пароль',
-        text: 'Ваш логин: ' + newData.email + '\nВаш новый пароль: ' + pass + '\n\nВойти в панель можно здесь http://www.intimmarket.com/page/partners\n\nВаша партнёрская ссылка находится внутри панели.'
+        text: 'Ваш логин: ' + newData.email + '\nВаш новый пароль: ' + pass + '\n\nВойти в панель можно здесь http://chaochai.ru/page/partners\n\nВаша партнёрская ссылка находится внутри панели.'
       };
       transport.sendMail(message, function(error) {
         if(error){
@@ -558,7 +558,7 @@ var validatePassword = function(plainPass, hashedPass, callback) {
 
 //mongodb
 
-mongoose.connect('mongodb://mongodb.fr1.server.sovechkin.com/intimmarket');
+mongoose.connect('mongodb://mongodb.fr1.server.sovechkin.com/chaochai');
 
 var UsersSchema = new Schema();
 
