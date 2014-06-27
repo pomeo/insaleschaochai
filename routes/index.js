@@ -21,7 +21,7 @@ status = {
 };
 
 var transport = nodemailer.createTransport("SMTP", {
-  service: "yandex",
+  service: "Gmail",
   auth: {
     user: process.env.EMAILLOGIN,
     pass: process.env.EMAILPASS
