@@ -66,12 +66,15 @@ router.get('/admin', function(req, res) {
       page = 0;
     }
     Users.find({}, {}, { sort: { 'partnerid' : -1 }, skip: page*per_page, limit: per_page }, function(e, o) {
-      res.render('admin', {
-        title    : 'Панель администратора chaochai.ru',
-        users    : o,
-        page     : page,
-        per_page : per_page,
-        moment   : moment
+      Users.count({}, function(err, count) {
+        res.render('admin', {
+          title    : 'Панель администратора chaochai.ru',
+          users    : o,
+          count    : count,
+          page     : page,
+          per_page : per_page,
+          moment   : moment
+        });
       });
     });
   } else {
