@@ -8,7 +8,7 @@ set :application, "test1.sovechkin.com"
 require           "capistrano-offroad"
 offroad_modules   "defaults", "supervisord"
 set :repository,  "git@github.com:pomeo/insaleschaochai.git"
-set :deploy_to,   "/home/ubuntu/www/chaochai"
+set :deploy_to,   "/home/ubuntu/projects/chaochai"
 set :supervisord_start_group, "chaochai"
 set :supervisord_stop_group, "chaochai"
 #========================
@@ -19,7 +19,7 @@ role :app,        "ubuntu@#{application}"
 namespace :deploy do
   desc "Change node.js port"
   task :chg_port do
-    run "sed -i 's/3000/7000/g' #{current_path}/app.js"
+    run "sed -i 's/3000/3400/g' #{current_path}/app.js"
   end
 end
 
