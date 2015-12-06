@@ -567,7 +567,7 @@ var validatePassword = function(plainPass, hashedPass, callback) {
 
 //mongodb
 
-mongoose.connect('mongodb://127.0.0.1/chaochai');
+mongoose.connect('mongodb://10.3.100.1/chaochai');
 
 var UsersSchema = new Schema();
 
